@@ -7,14 +7,8 @@ $firstname=$_SESSION['name'];
 
 if("ougiaroglou"==$_SESSION['name'])
 {
-    $id='2'
-}
-else if("papadhmhtriou"==$_SESSION['name'])
-{
-    $id='1';
-}
-
-$sql="INSERT INTO MyGuests (id,firstname,anakoinwsh)
+    $id="1";
+    $sql="INSERT INTO ougiaroglou (id,firstname,anakoinwsh)
 VALUES('$id','$firstname','$text')";
 
 if ($conn->query($sql) === TRUE) 
@@ -25,4 +19,22 @@ else
 {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
+}
+else if("papadhmhtriou"==$_SESSION['name'])
+{
+    $id="2";
+    $sql="INSERT INTO MyGeussts (id,firstname,anakoinwsh)
+VALUES('$id','$firstname','$text')";
+
+if ($conn->query($sql) === TRUE) 
+{
+  echo "New record created successfully";
+} 
+else 
+{
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
+}
+
+
 ?>
