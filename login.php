@@ -1,35 +1,34 @@
 <?php
-  $email=$_POST['email'];
- $password=$_POST['password'];
+$conn = new mysqli("localhost","ds19138","202183191","ds19138");
 
-$con = new mysqli("localhost","ds19138","","test");
-if($con->connect_error)
+
+
+   
+if(!empty($_POST['login']))
 {
-    die("failed to connect :".$con->connect_error);
-}
-else
-{
-    $stmt=$con->prepare("select *from registration where email=?");
-    $stmt->blind_param("s",$email);
-    $stmt->execute();
-    $stmt_result=$stmt->get_result();
-    if($stmt_result->num_rows>0)
+    $username=$_POST['name'];
+    
+    $password=$_POST['password'];
+    
+    $query =" select * from login where username ='$username' and password='$password' ";
+    
+    $result=mysqli_query($conn,$query);
+    
+    $count= mysqli_num_rows($result);
+    
+    if($count>0)
     {
-        $data =$stmt_result->fetch_assoc();
-        if($data['password']==$password)
-        {
-            echo "<h2>login successfully</h2>";
-        }
-        else
-        {
-            echo"<h2>wrong</h2>";
-        }
+        
+        print "welcome $_REQUEST[name] ";
+        session_start();
+        $_SESSION['name']=$_POST['name'];
+        print "<a href=\"welcome.php\">goto next page</a>";
+        
     }
     else
     {
-        echo "<h2>INvalid email or password</h2>";
+        echo"failed";
     }
     
-    
 }
-?>
+   ?>
